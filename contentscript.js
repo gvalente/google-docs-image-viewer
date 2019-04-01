@@ -1,37 +1,33 @@
 let images = new Map();
+const GDOCS_IMG_OBJECT_CLASS = "kix-embeddedobject-image";
+const GDOCS_IMG_CONTAINER_CLASS = "kix-embeddedobject-view";
 
-// Check if page is google docs
-// can this be done from the manifest to only apply on googledocs domains?
-
-// Create image menu overlay
-//v1
-// single button to view image in new tab
-
-//v2
-// button to view image in shadowbox
-// import shadowbox
-// button to download image
-
-// Scan for all images within the document
-// get image source
-// append hidden image menu onto image
-
-// check if a url is a google docs
-// function isGDOCurl(url) {
-//   return url.indexOf("docs.google.com") !== -1;
-// }
-
-// find the images and store the object and image source
-function findImageEmbeds() {
-  const images = document.getElementsByClassName("kix-embeddedobject-image");
-  const imageSourceURL = images[0]
-    .getElementsByTagName("image")[0]
-    .getAttribute("xlink:href");
-
-  const imgContainer = images[0].closest(".goog-inline-block");
-  const imgHTML = `<a href="${imageSourceURL}" target="_blank" class="imageLink"><p>View Image</p></a>`;
-  imgContainer.insertAdjacentHTML("afterbegin", imgHTML);
+// Get the image URL from the GDOCS_IMG_OBJECT_CLASS
+function getImageURL(image) {
+  return image.getElementsByTagName("image")[0].getAttribute("xlink:href");
 }
-window.addEventListener("load", () => findImageEmbeds(), false);
 
-// <a href="https://lh4.googleusercontent.com/mYxq77dhBdiScIQ_Y1NqM0uUUdwA3XebNKFvR69qiyysexI_FV3lRtVaHvt1Zl9y8uiZU7qE2vZsHyo_E6FwYfDE2Dki7uCoKPTne7RifoxJhunSY8wyC95GgpS_IodZUZW-PEej" target="_blank" class="imageLink"><p>View Image</p></a>
+// Insert image anchor into parent container
+function insertImageLinkAnchor(image) {
+  const imageContainer = image.closest(`.${GDOCS_IMG_CONTAINER_CLASS}`);
+  const imageURL = getImageURL(image);
+  const imageHTML = `<a href="${imageURL}" target="_blank" class="imageLink"></a>`;
+  imageContainer.insertAdjacentHTML("afterbegin", imageHTML);
+}
+
+// Find the images and store the object and image source
+function findImageEmbeds() {
+  //TODO: 1
+  let images = document.getElementsByClassName(GDOCS_IMG_OBJECT_CLASS);
+  for (let image of images) {
+    insertImageLinkAnchor(image);
+  }
+}
+
+// Initiate after all assets have loaded
+window.addEventListener("load", findImageEmbeds(), false);
+
+//TODO 1: Not finding images when they are in bulleted lists or tables
+// standalone: https://docs.google.com/document/d/1T570Ldo_PcOhL4jNHDOAc4TUnGct2cJw-D7cba6aYec/edit
+// lists: https://docs.google.com/document/d/1qZQEd1cDHPBxGHZ5I15kFIoyxjFdn7cBlEVxYoUZgnU/edit
+// tables: https://docs.google.com/document/d/18gKe4HfBRnL75ouNO5S5MP7xt72QF_xJjo0fmEjuvw0/edit

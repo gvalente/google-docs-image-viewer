@@ -3,10 +3,6 @@
   "description": "Free embedded google doc images!",
   "author": "Gino Valente",
   "permissions": ["tabs"],
-  "background": {
-    "scripts": ["background.js"],
-    "persistent": false
-  },
   "content_scripts": [
     {
       "all_frames": false,

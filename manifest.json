@@ -1,0 +1,21 @@
+{
+  "name": "Google Docs Image Viewer",
+  "description": "Free embedded google doc images!",
+  "author": "Gino Valente",
+  "permissions": ["tabs"],
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "all_frames": false,
+      "css": ["style.css"],
+      "js": ["contentscript.js"],
+      "matches": ["https://docs.google.com/*"],
+      "run_at": "document_end"
+    }
+  ],
+  "manifest_version": 2,
+  "version": "1.0"
+}

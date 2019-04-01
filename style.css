@@ -1,0 +1,37 @@
+.imageLink {
+  display: block;
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  padding: 8px;
+  background-color: rgba(0, 0, 0);
+  border-radius: 4px;
+  opacity: 0;
+  z-index: 9999;
+  text-decoration: none;
+  transition: opacity 400ms;
+  transition-timing-function: ease;
+}
+.imageLink:hover {
+  opacity: 0.84 !important;
+}
+.imageLink:visited,
+.imageLink:link {
+  color: rgba(255, 255, 255, 0.8);
+  text-decoration: none;
+}
+.imageLink p {
+  margin: 0;
+  font: 14px/22px normal Roboto, RobotoDraft, Helvetica, Arial, sans-serif;
+  color: rgba(255, 255, 255, 0.8);
+  text-align: center;
+}
+
+.goog-inline-block:hover .imageLink {
+  opacity: 0.6;
+}
+
+/* TODO: the selection box border blocks the View Image click. Find a better solution without modifynig page styles. */
+.docs-squarehandleselectionbox-border {
+  display: none !important;
+}

@@ -34,7 +34,7 @@ window.addEventListener(
   () => {
     findImageEmbeds();
     // Recheck for images because gDocs lazy loads images on scroll
-    setInterval(findImageEmbeds, 10000);
+    setInterval(findImageEmbeds, 8000);
   },
   false
 );

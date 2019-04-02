@@ -9,8 +9,8 @@ function getImageURL(image) {
 
 // Insert image anchor into parent container
 function insertImageLinkAnchor(image) {
-  const imageContainer = image.closest(`.${GDOCS_IMG_CONTAINER_CLASS}`);
   const imageURL = getImageURL(image);
+  const imageContainer = image.closest(`.${GDOCS_IMG_CONTAINER_CLASS}`);
   const imageHTML = `<a href="${imageURL}" target="_blank" class="imageLink"></a>`;
   imageContainer.insertAdjacentHTML("afterbegin", imageHTML);
 }
@@ -25,7 +25,7 @@ function findImageEmbeds() {
 }
 
 // Initiate after all assets have loaded
-window.addEventListener("load", findImageEmbeds(), false);
+window.addEventListener("load", findImageEmbeds, false);
 
 //TODO 1: Not finding images when they are in bulleted lists or tables
 // standalone: https://docs.google.com/document/d/1T570Ldo_PcOhL4jNHDOAc4TUnGct2cJw-D7cba6aYec/edit

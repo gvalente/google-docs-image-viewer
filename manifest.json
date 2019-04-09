@@ -1,8 +1,8 @@
 {
   "name": "Google Docs Image Viewer",
-  "description": "Free your embedded google docs images!",
+  "description": "Free your embedded Google Docs images!",
   "author": "Gino Valente",
-  "permissions": ["tabs"],
+  "permissions": [],
   "browser_action": {
     "default_title": "Google Docs Image Viewer",
     "default_icon": {

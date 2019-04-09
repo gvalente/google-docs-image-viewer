@@ -1,4 +1,3 @@
-let images = new Map();
 const GDOCS_IMG_OBJECT_CLASS = "kix-embeddedobject-image";
 const GDOCS_IMG_CONTAINER_CLASS = "kix-embeddedobject-view";
 

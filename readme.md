@@ -18,8 +18,7 @@ If you're frustrated with embedded images locked away in Google Docs then this c
 
 ## Installation
 
-Install the Chrome plugin from the Chrome extension web store.
-{{chrome extension web store link}}
+Install the extension from the [Chrome extension web store](https://chrome.google.com/webstore/detail/google-docs-image-viewer/kdlnfjjcbeaehfkoefcgfmnmdocogbja "chrome store install link").
 <br />
 <br />
 

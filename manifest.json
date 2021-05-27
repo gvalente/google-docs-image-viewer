@@ -21,12 +21,21 @@
   "content_scripts": [
     {
       "all_frames": false,
-      "css": ["style.css"],
-      "js": ["contentscript.js"],
-      "matches": ["https://docs.google.com/*"],
+      "css": [
+        "style.css"
+      ],
+      "js": [
+        "lib/google-sheets.js",
+        "lib/google-docs.js",
+        "contentscript.js"
+      ],
+      "matches": [
+        "https://docs.google.com/document/*",
+        "https://docs.google.com/spreadsheets/*"
+      ],
       "run_at": "document_end"
     }
   ],
   "manifest_version": 2,
-  "version": "1.2"
+  "version": "1.3"
 }

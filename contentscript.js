@@ -1,39 +1,39 @@
-const GDOCS_IMG_OBJECT_CLASS = "kix-embeddedobject-image";
-const GDOCS_IMG_CONTAINER_CLASS = "kix-embeddedobject-view";
+// Global constants
+const GOOGLE_PRODUCTS = {
+  DOCUMENT: 'documents',
+  SHEETS: 'sheets'
+};
 
 // Get the image URL from the GDOCS_IMG_OBJECT_CLASS
 function getImageURL(image) {
-  return image.getElementsByTagName("image")[0].getAttribute("xlink:href");
+  return image.getElementsByTagName("image")[0].src;
 }
 
-// Insert image anchor into parent container
-function insertImageLinkAnchor(image) {
-  const imageContainer = image.closest(`.${GDOCS_IMG_CONTAINER_CLASS}`);
+// Identify which google product you're currently on by URL
+function initiateCurrentGoogleProduct() {
+  const currentURL = location.href;
 
-  // skip if the imageContainer already has the imageLink object
-  if (imageContainer.querySelector(".imageLink") != null) return;
-
-  // insert imageLink object
-  const imageURL = getImageURL(image);
-  const imageHTML = `<a href="${imageURL}" target="_blank" class="imageLink"></a>`;
-  imageContainer.insertAdjacentHTML("afterbegin", imageHTML);
-}
-
-// Find the images and store the object and image source
-function findImageEmbeds() {
-  let images = document.getElementsByClassName(GDOCS_IMG_OBJECT_CLASS);
-  for (let image of images) {
-    insertImageLinkAnchor(image);
+  if (currentURL.indexOf('document') !== -1) {
+    // return GOOGLE_PRODUCTS.DOCUMENT;
+    findImagesOnDocs();
+  } else if (currentURL.indexOf('spreadsheets') !== -1) {
+    // return GOOGLE_PRODUCTS.DOCUMENT;
+    findImagesOnSheets();
+  } else {
+    console.log('Unable to identify product from URL: ' + currentURL);
   }
+  // TODO: Filter out domain for home directory
 }
 
 // Initiate after initial assets have loaded
 window.addEventListener(
   "load",
   () => {
-    findImageEmbeds();
+    initiateCurrentGoogleProduct();
+    //TODO: optimize to only call the proper product function
+
     // Recheck for images because gDocs lazy loads images on scroll
-    setInterval(findImageEmbeds, 8000);
+    setInterval(initiateCurrentGoogleProduct(), 8000);
   },
   false
 );

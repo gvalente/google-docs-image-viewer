@@ -10,30 +10,32 @@ function getImageURL(image) {
 }
 
 // Identify which google product you're currently on by URL
-function initiateCurrentGoogleProduct() {
-  const currentURL = location.href;
-
+//TODO: optimize to only call the proper product function instead of looping through all logic ever interval
+function initiateCurrentGoogleProduct(currentURL) {
   if (currentURL.indexOf('document') !== -1) {
-    // return GOOGLE_PRODUCTS.DOCUMENT;
-    findImagesOnDocs();
+    insertImageLinksToDocs();
   } else if (currentURL.indexOf('spreadsheets') !== -1) {
-    // return GOOGLE_PRODUCTS.DOCUMENT;
-    findImagesOnSheets();
+    insertImageLinksToSheets();
   } else {
     console.log('Unable to identify product from URL: ' + currentURL);
   }
-  // TODO: Filter out domain for home directory
 }
+
 
 // Initiate after initial assets have loaded
 window.addEventListener(
   "load",
   () => {
-    initiateCurrentGoogleProduct();
-    //TODO: optimize to only call the proper product function
+    const currentURL = location.href;
+    // TODO: Filter out domain for home directory
+    initiateCurrentGoogleProduct(currentURL);
 
     // Recheck for images because gDocs lazy loads images on scroll
-    setInterval(initiateCurrentGoogleProduct(), 8000);
+    setInterval(
+      () => {
+        initiateCurrentGoogleProduct(currentURL);
+      },
+      8000);
   },
   false
 );

@@ -4,11 +4,6 @@ const GOOGLE_PRODUCTS = {
   SHEETS: 'sheets'
 };
 
-// Get the image URL from the GDOCS_IMG_OBJECT_CLASS
-function getImageURL(image) {
-  return image.getElementsByTagName("image")[0].src;
-}
-
 // Identify which google product you're currently on by URL
 //TODO: optimize to only call the proper product function instead of looping through all logic ever interval
 function initiateCurrentGoogleProduct(currentURL) {
